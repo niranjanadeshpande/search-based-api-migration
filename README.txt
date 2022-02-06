@@ -1,4 +1,4 @@
-This repository contains all the files required to replicate results from the paper "Search-Based Third-Party Library Migration at the Method-Level".
+This repository contains all the files required to replicate results from the paper "Search-Based Third-Party Library Migration at the Method-Level" published at EvoApps 2022.
 
 To be able to run this code, you need to install the MOEA framework library that can be found at "http://moeaframework.org/".
 The suggested method to run search algorithms is by copying all files and folders to the "../MOEAFramework-2.13/examples/org/moeaframework/examples/ga/knapsack/files" directory.
