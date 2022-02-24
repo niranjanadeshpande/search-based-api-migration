@@ -28,10 +28,6 @@ for i in range(0, len(algorithms)):
         avg_columns.append(temp_1)
         avg_columns.append(temp_2)
         avg_columns.append(temp_3)
-        avg_columns.append(temp_4)
-        avg_columns.append(temp_5)
-        avg_columns.append(temp_6)
-        avg_columns.append(temp_7)
 
 
 
@@ -182,10 +178,21 @@ for migration_ru in migration_id_arr:
                         
                         
                         metric_dataframe.iloc[trial_num]["Non Optimist Accuracy"] = sklearn.metrics.accuracy_score(ground_truth_result_num_arr, ga_result_num_arr)
-                        metric_dataframe.iloc[trial_num]["Error"] = (num_false_positives+num_false_negatives)/(num_true_positives+num_true_negatives+num_false_positives+num_false_negatives)
+                        #metric_dataframe.iloc[trial_num]["Error"] = (num_false_positives+num_false_negatives)/(num_true_positives+num_true_negatives+num_false_positives+num_false_negatives)
                         
                         metric_dataframe.iloc[trial_num]["Non Optimist Precision"] = sklearn.metrics.precision_score(ground_truth_result_num_arr, ga_result_num_arr)
                         metric_dataframe.iloc[trial_num]["Non Optimist Recall"] = sklearn.metrics.recall_score(ground_truth_result_num_arr, ga_result_num_arr)
+
+                    from scipy.stats import wilcoxon
+                    
+                    try:
+                       	_,p = wilcoxon(metric_dataframe["Non Optimist Precision"].values)
+                       	print("p-value precision:", p)
+                        _,p = wilcoxon(metric_dataframe["Non Optimist Recall"].values)
+                       	print("p-value recall:", p)
+                    except:
+                       	print("Cannot calculate statistical significance.")
+
                     metrics_df_path = folder_path+"/"+hyper_param+"non_optimistic_metrics_dataframes"
                     if not os.path.exists(metrics_df_path):
                         os.mkdir(metrics_df_path)
